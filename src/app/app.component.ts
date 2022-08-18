@@ -1,4 +1,6 @@
+import { RegistrationService } from './registration.service';
 import { Component } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'RegistrationApp';
+ 
+  msg:any;
+
+  registrationForm = new FormGroup({
+    name : new FormControl('jhgj')
+  })
+
+  constructor(private registrationService:RegistrationService){}
+
+  onSubmit(){
+    this.registrationService.register(this.registrationForm.value).subscribe(data => this.msg = data);
+  }
 }
